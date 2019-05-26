@@ -1,5 +1,7 @@
 'use strict;'
 
+const assert = require('assert');
+
 const arrOfPeople = [{
     id: 1,
     name: "Charles Young",
@@ -188,4 +190,50 @@ function removeMethod(element) {
     for (var i = 0; i < items.length; i++) {
         items[i].onclick = function () { this.parentNode.removeChild(this); }
     }
+}
+
+if (typeof describe === 'function') {
+
+    describe('DodgeBall Unite Test', function () {
+
+        it('1. should have a id, a name, a Skill and player upon instantiation', function () {
+            let person = new player('5', 'Nurzat Nijat (C)', '99', 'Javascript', 'Austin, Texas');
+            assert.equal(person.id, '5');
+            assert.equal(person.name, 'Nurzat Nijat (C)');
+        });
+
+        it('2. can make player', function () {
+            const personObj = [{
+                id: 5,
+                name: "Nurzat Nijat (C)",
+                age: 99,
+                skillSet: "Javascript",
+                placeBorn: "Austin, Texas"
+            }]
+            const getObj = personObj.find(player => player.id === 5);
+            assert.equal(getObj.name, 'Nurzat Nijat (C)');
+        });
+
+        it('3. can list player', function () {
+            const personObj = [
+                {
+                    id: 1,
+                    name: "Charles Young",
+                    age: 55,
+                    skillSet: "welding",
+                    placeBorn: "Omaha, Nebraska"
+                }, {
+                    id: 5,
+                    name: "Nurzat Nijat (C)",
+                    age: 99,
+                    skillSet: "Javascript",
+                    placeBorn: "Austin, Texas"
+                }]
+            const mapResult = personObj.map(person => {
+                return person.id
+            })
+            assert.deepEqual(mapResult, [1, 5]);
+        });
+
+    });
 }
